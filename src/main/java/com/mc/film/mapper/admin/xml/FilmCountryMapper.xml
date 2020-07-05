@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.FilmCountryMapper">
+
+	<!--国家/地区-->
+	<resultMap id="filmCountryVoMap" type="com.mc.film.entity.vo.FilmCountryVo">
+		<result property="uid" column="uid"/>
+		<result property="country" column="film_country"/>
+	</resultMap>
+
+	<select id="selectFilmCountryList" resultMap="filmCountryVoMap">
+		select uid, film_country from mc_film_country
+	</select>
+</mapper>

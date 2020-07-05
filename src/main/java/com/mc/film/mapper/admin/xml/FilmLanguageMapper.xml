@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.FilmLanguageMapper">
+
+	<!--语言-->
+	<resultMap id="filmLanguageVoMap" type="com.mc.film.entity.vo.FilmLanguageVo">
+		<result property="uid" column="uid"/>
+		<result property="language" column="film_language"/>
+	</resultMap>
+
+	<select id="selectFilmLanguageList" resultMap="filmLanguageVoMap">
+		select uid, film_language from mc_film_language
+	</select>
+</mapper>

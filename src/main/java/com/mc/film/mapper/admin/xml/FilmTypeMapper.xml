@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.FilmTypeMapper">
+
+	<!--类型-->
+	<resultMap id="filmTypeVoMap" type="com.mc.film.entity.vo.FilmTypeVo">
+		<result property="uid" column="uid"/>
+		<result property="type" column="film_type"/>
+	</resultMap>
+
+	<select id="selectFilmTypeList" resultMap="filmTypeVoMap">
+		select uid, film_type from mc_film_type
+	</select>
+</mapper>

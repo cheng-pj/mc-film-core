@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.TorrentMapper">
+
+	<!--种子-->
+	<resultMap id="torrentVoMap" type="com.mc.film.entity.vo.TorrentVo">
+		<id property="uid" column="uid"/>
+		<result property="torrentName" column="torrent_name"/>
+		<result property="torrentUrl" column="torrent_url"/>
+		<result property="torrentMagnet" column="torrent_magnet"/>
+		<result property="filmId" column="film_id"/>
+		<result property="filmChiName" column="film_chi_name"/>
+	</resultMap>
+
+	<select id="selectTorrentList" resultMap="torrentVoMap">
+		select mft.uid            as uid,
+			   mft.torrent_name   as torrent_name,
+			   mft.torrent_url    as torrent_url,
+			   mft.torrent_magnet as torrent_magnet,
+			   m.uid              as film_id,
+			   m.film_chi_name    as film_chi_name,
+			   m.create_time      as create_time,
+			   m.update_time      as update_time
+		from mc_film_torrent mft
+				 left join mc_film m on mft.film_id = m.uid
+		<if test="torrentName != null and torrentName != ''">
+			where torrent_name like CONCAT('%',#{torrentName, jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

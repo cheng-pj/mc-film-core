@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.FilmMapper">
+
+	<resultMap id="FilmVoMap" type="com.mc.film.entity.vo.FilmVo">
+		<id property="uid" column="uid"/>
+		<result property="filmName" column="film_name"/>
+		<result property="filmChiName" column="film_chi_name"/>
+		<result property="filmReleaseDate" column="film_release_date"/>
+		<result property="filmDuration" column="film_duration"/>
+		<result property="filmImdb" column="film_imdb"/>
+		<result property="filmDouban" column="film_douban"/>
+		<result property="filmIntroduce" column="film_introduce"/>
+		<association property="filmCountry" javaType="com.mc.film.entity.vo.FilmCountryVo" resultMap="filmCountryVoMap"/>
+		<association property="filmLanguage" javaType="com.mc.film.entity.vo.FilmLanguageVo" resultMap="filmLanguageVoMap"/>
+		<association property="filmType" javaType="com.mc.film.entity.vo.FilmTypeVo" resultMap="filmTypeVoMap"/>
+		<association property="filmPoster" javaType="com.mc.film.entity.vo.FilmPosterVo" resultMap="filmPosterVoMap"/>
+	</resultMap>
+
+	<!--国家/地区-->
+	<resultMap id="filmCountryVoMap" type="com.mc.film.entity.vo.FilmCountryVo">
+		<result property="uid" column="country_id"/>
+		<result property="country" column="film_country"/>
+	</resultMap>
+
+	<!--语言-->
+	<resultMap id="filmLanguageVoMap" type="com.mc.film.entity.vo.FilmLanguageVo">
+		<result property="uid" column="language_id"/>
+		<result property="language" column="film_language"/>
+	</resultMap>
+
+	<!--类型-->
+	<resultMap id="filmTypeVoMap" type="com.mc.film.entity.vo.FilmTypeVo">
+		<result property="uid" column="type_id"/>
+		<result property="type" column="film_type"/>
+	</resultMap>
+
+	<!--海报链接-->
+	<resultMap id="filmPosterVoMap" type="com.mc.film.entity.vo.FilmPosterVo">
+		<result property="uid" column="poster_id"/>
+		<result property="posterUrl" column="poster_url"/>
+	</resultMap>
+
+	<!--电影列表详情-->
+	<select id="selectFilmList" resultMap="FilmVoMap">
+		select m.uid               as uid,
+			   m.film_name         as film_name,
+			   m.film_chi_name     as film_chi_name,
+			   m.film_release_date as film_release_date,
+			   m.film_duration     as film_duration,
+			   m.film_imdb         as film_imdb,
+			   m.film_douban       as film_douban,
+			   m.film_introduce    as film_introduce,
+			   mfc.uid             as country_id,
+			   mfc.film_country    as film_country,
+			   mfl.uid             as language_id,
+			   mfl.film_language   as film_language,
+			   mft.uid             as type_id,
+			   mft.film_type       as film_type,
+			   mfp.uid             as poster_id,
+			   mfp.poster_url      as poster_url
+		from mc_film as m
+				 left join mc_film_country mfc on m.film_country_id = mfc.uid
+				 left join mc_film_language mfl on m.film_language_id = mfl.uid
+				 left join mc_film_type mft on m.film_type_id = mft.uid
+				 left join mc_film_poster mfp on m.film_poster_id = mfp.uid
+		<if test="filmChiName != null and filmChiName != ''">
+			where m.film_chi_name like CONCAT('%',#{filmChiName, jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+</mapper>

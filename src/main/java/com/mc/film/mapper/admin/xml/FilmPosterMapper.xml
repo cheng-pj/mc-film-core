@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.film.mapper.admin.FilmPosterMapper">
+
+	<!--海报链接-->
+	<resultMap id="filmPosterVoMap" type="com.mc.film.entity.vo.FilmPosterVo">
+		<result property="uid" column="uid"/>
+		<result property="posterName" column="poster_name"/>
+		<result property="posterUrl" column="poster_url"/>
+	</resultMap>
+
+	<select id="selectFilmPosterList" resultMap="filmPosterVoMap">
+		select uid, poster_name, poster_url from mc_film_poster
+	</select>
+</mapper>
