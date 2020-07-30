@@ -81,7 +81,7 @@ public class FilmCountryController {
 
 	@ApiOperation("修改种子数据")
 	@PostMapping("/update")
-	public ResData updateFilm(@ApiParam(value = "FilmCountry 对象", required = true) @RequestBody FilmCountry filmCountry,
+	public ResData updateFilmCountry(@ApiParam(value = "FilmCountry 对象", required = true) @RequestBody FilmCountry filmCountry,
 							  HttpServletRequest request) {
 
 		if (filmCountry.getFilmCountry() == null) return ResData.error().message("参数不正确");

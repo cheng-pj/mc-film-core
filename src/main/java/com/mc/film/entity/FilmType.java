@@ -1,8 +1,6 @@
 package com.mc.film.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.mc.film.common.model.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +14,7 @@ import lombok.experimental.Accessors;
  * @author Mr.Cheng
  * @since 2020/6/27
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

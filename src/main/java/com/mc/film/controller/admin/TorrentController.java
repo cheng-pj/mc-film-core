@@ -63,7 +63,7 @@ public class TorrentController {
 	@ApiOperation("添加种子")
 	@PostMapping("/add")
 	public ResData insertTorrent(@ApiParam(value = "Torrent 对象", required = true) @RequestBody Torrent torrent,
-							  HttpServletRequest request) {
+								 HttpServletRequest request) {
 
 		if (torrent.getTorrentName() == null ||
 				torrent.getTorrentUrl() == null ||
@@ -107,7 +107,7 @@ public class TorrentController {
 	@ApiOperation("删除种子")
 	@GetMapping("/delete")
 	public ResData deleteTorrent(@ApiParam(value = "uid", required = true) @RequestParam String uid,
-							  HttpServletRequest request) {
+								 HttpServletRequest request) {
 
 		if (StringUtils.isEmpty(uid)) return ResData.error().message("参数不正确");
 
@@ -116,9 +116,8 @@ public class TorrentController {
 		if (!flag) return ResData.setResult(ResultCodeEnum.TOKEN_EXPIRED);
 
 		boolean isDelete = torrentService.removeById(uid);
-		if (!isDelete) {
-			return ResData.success().message("删除失败").data(false);
-		}
+		if (!isDelete) return ResData.success().message("删除失败").data(false);
+
 		return ResData.success().message("删除成功").data(true);
 	}
 }

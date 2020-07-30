@@ -25,11 +25,7 @@ public class BaseEntity {
 	private String uid;
 
 	@ApiModelProperty(value = "创建时间")
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private Date createTime;
-
-	@ApiModelProperty(value = "更新时间")
-	@TableField(value = "update_time", fill = FieldFill.UPDATE)
-	private Date updateTime;
+	@TableField(value = "creat_update_Time", fill = FieldFill.INSERT_UPDATE)
+	private Date creatOrUpdateTime;
 
 }

@@ -13,14 +13,13 @@
 	</resultMap>
 
 	<select id="selectTorrentList" resultMap="torrentVoMap">
-		select mft.uid            as uid,
-			   mft.torrent_name   as torrent_name,
-			   mft.torrent_url    as torrent_url,
-			   mft.torrent_magnet as torrent_magnet,
-			   m.uid              as film_id,
-			   m.film_chi_name    as film_chi_name,
-			   m.create_time      as create_time,
-			   m.update_time      as update_time
+		select mft.uid             as uid,
+			   mft.torrent_name    as torrent_name,
+			   mft.torrent_url     as torrent_url,
+			   mft.torrent_magnet  as torrent_magnet,
+			   m.uid               as film_id,
+			   m.film_chi_name     as film_chi_name,
+			   m.creat_update_time as creat_update_time
 		from mc_film_torrent mft
 				 left join mc_film m on mft.film_id = m.uid
 		<if test="torrentName != null and torrentName != ''">

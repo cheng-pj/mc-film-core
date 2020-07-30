@@ -5,6 +5,7 @@ import com.mc.film.common.result.ResData;
 import com.mc.film.common.result.ResultCodeEnum;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * @author Mr.Cheng
@@ -65,9 +65,9 @@ public class GlobalExceptionHandler {
 	 * @param e
 	 * @return
 	 */
-	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	@ExceptionHandler(DuplicateKeyException.class)
 	@ResponseBody
-	public ResData error(SQLIntegrityConstraintViolationException e) {
+	public ResData error(DuplicateKeyException e) {
 
 		log.error(LogHandler.getExceptionMsg(e));
 
