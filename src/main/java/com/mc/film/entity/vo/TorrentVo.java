@@ -30,9 +30,6 @@ public class TorrentVo {
 	@ApiModelProperty(value = "影片中文名字")
 	private String filmChiName;
 
-	@ApiModelProperty(value = "创建时间")
-	private Date createTime;
-
-	@ApiModelProperty(value = "更新时间")
-	private Date updateTime;
+	@ApiModelProperty(value = "创建/编辑时间")
+	private Date createOrUpdateTime;
 }
